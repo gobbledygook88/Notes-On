@@ -68,6 +68,10 @@ Start single line comments with the hash key `#`. For multi-line comments use th
     multi-line comment """
 
 ### Raw Input
+To ask for user input use the following commands:
+
+    first_input  = input("Your name please:")                       // Just for strings
+    second_input = raw_input("Give me something, anything:")        // Any data type is accepted
 
 ### Control Flow
 Syntax for conditional statements are
@@ -109,6 +113,11 @@ Use _splat arguments_ if you do not know how many arguments a function will take
         # Do something
 
     man_arguments("arg1", "arg2", "arg3")
+
+To specific an optional argument, or provide a default value for a parameter, define it in the function header:
+
+    def function_name(req_arg,opt_arg="optional"):
+        # Do something
 
 ### Modules
 A module is a file that contains definitions — including variables and functions — that you can use. You can import modules by using the `import` command, such as for `math` library
