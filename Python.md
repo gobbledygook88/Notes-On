@@ -112,7 +112,7 @@ Use _splat arguments_ if you do not know how many arguments a function will take
     def many_arguments(*args):
         # Do something
 
-    man_arguments("arg1", "arg2", "arg3")
+    many_arguments("arg1", "arg2", "arg3")
 
 To specific an optional argument, or provide a default value for a parameter, define it in the function header:
 
