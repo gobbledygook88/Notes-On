@@ -58,6 +58,9 @@ We have already met the `Object` constructor, here are some more alongside their
     // Array Constructor                |       // Literal Notation
     var arr = new Array();              |       var arr = [];
 
+    // String Constructor               |       // Literal Notation
+    var str = new String();             |       var str = "";
+
 To create your out constructor, use the following
 
     function cons_name(arg_one,arg_two) {
@@ -92,6 +95,8 @@ In general, if you want to add a method to a class such that all members of the 
         // Do something
     }
 
+Note that we can even extend the prototype of a built-in javascript class.
+
 ### Inheritance
 You can create new classes which are _children_ of other classes, which effectively become the _parents_.
 
@@ -99,6 +104,13 @@ You can create new classes which are _children_ of other classes, which effectiv
     Child.prototype = new Parent();
 
 Hence, you can create _prototype chains_, whereby children and grandchildren etc can access properties and methods belonging to their parents and grandparents etc.
+
+To test whether a child is an instance of their parent, we can use the `instanceof` keyword.
+
+    console.log(Child instanceof Parent);
+
+### Encapsulation
+Encapsulation is the grouping of an object's data together with its methods. Encapsulating objects allows us to reuse blocks of code to have a more efficient program.
 
 ### Public and Private variables
 Up to now, we have been defining _public_ variables in our classes and objects.
@@ -127,6 +139,7 @@ There are various loops in Javascript, as in many other programming languages.
 
     var i,                          // Iterator
         NUM = 100;                  // Arbitrary limit
+
     for( i=0; i<NUM; i++ ) {        // A `for` loop
         // Do something
     }
@@ -135,7 +148,37 @@ There are various loops in Javascript, as in many other programming languages.
         // Do something
     }
 
+### Arrays
+An _indexed array_ is just an ordered list.
+
+    var array = ["string","another string","yet another string"];
+
+To access the array, we use literal notation with an index based at zero.
+
+    console.log(array[0]);                  // string
+
+To add to the end of an array, we use the `push()` method.
+
+    array.push("one more string");          // ["string","another string","yet another string","one more string"]
+
+The `splice()` method can be used to remove items from an array. It takes two arguments, both integers, specifying the index to start at, and the number of items to remove.
+
+    array.splice(1,2);                      // ["string","one more string"]
+
+To copy an array, or part of an array, we use the `slice()` method. If there are no arguments, then the whole array is copied. Else, we state two arguments which specify the start and end indexes required.
+
+    array.slice();                          // ["string","another string","yet another string","one more string"]
+    array.slice(1,2);                       // ["another string","yet another string"]
+
+Arrays can contain any objects, in any combination, even arrays themselves to make multi-dimentional arrays.
+
+## Web Development
+
+### DOM Scripting
+
 ## Resources
 
-- [CodeAcademy](http://www.codecademy.com/) courses
+- [CodeAcademy](http://www.codecademy.com/) courses and [Glossary](http://www.codecademy.com/glossary/javascript)
 - [Javascript Weblog](http://javascriptweblog.wordpress.com/2010/06/07/understanding-javascript-prototypes/) on Prototypes
+- [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/JavaScript) Javascript documentation
+- [Javascript Scope Quiz](http://madebyknight.com/javascript-scope/)
