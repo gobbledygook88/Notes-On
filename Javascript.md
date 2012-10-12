@@ -182,3 +182,4 @@ Arrays can contain any objects, in any combination, even arrays themselves to ma
 - [Javascript Weblog](http://javascriptweblog.wordpress.com/2010/06/07/understanding-javascript-prototypes/) on Prototypes
 - [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/JavaScript) Javascript documentation
 - [Javascript Scope Quiz](http://madebyknight.com/javascript-scope/)
+- [Understanding Javascript OOP](http://killdream.github.com/blog/2011/10/understanding-javascript-oop/)
