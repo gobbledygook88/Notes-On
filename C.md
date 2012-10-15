@@ -16,6 +16,7 @@ X-Code
 ### Windows
 
 ## Basics
+
 ### Starting up
 The most basic code-base for a program written in C is shown below, with annotations:
 
