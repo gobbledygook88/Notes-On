@@ -24,7 +24,7 @@ The most basic program written in C is shown below, with annotations:
         return 0;                                           // Return statement
     }
 
-To compile the program, we use the following commands in termainl:
+To compile the program, we use the following commands in terminal:
 
     > g++ hello.cc -o hello
     > ./hello
@@ -36,7 +36,6 @@ Here is a quick run-down of the syntax:
 - Organise methods into a series of blocks
 - Must use semi-colons at the end of all statements
 - Code is case sensitive
-- 
 
 ### Comments
 To comment code, i.e. blocks of text which are to be ignored by the compiler, use
@@ -151,7 +150,8 @@ To read command line arguments, passed to the executable via the terminal, add e
 ### Conditional Structures
 The usual conditional structures are available in C++
 
-    // `if` statement
+`if` statement:
+
     if( condition ) {
         // Do something
     } else if( another condition ) {
@@ -160,9 +160,8 @@ The usual conditional structures are available in C++
         // Do another thing
     }
 
-&nbsp;
+`switch` statement:
 
-    // `switch` statement
     switch( identifier ) {
         case value1:
             statement1;
@@ -185,21 +184,20 @@ The usual conditional structures are available in C++
 ### Iterative Structures
 Again, the usual iterative structures are available.
 
-    // `for` loop
+`for` loop:
+
     for( initialiser; condition; update ) {
         // Do something over and over
     }
 
-&nbsp;
+`while` loop:
 
-    // `while` loop
     while( condition ) {
         // Do something
     }
 
-&nbsp;
+`do-while` loop:
 
-    // `do-while` loop
     do {
         // Do something at least once
     } while( condition );
@@ -336,7 +334,7 @@ or
 The `begin()` and `end()` member functions return an iterator marking the beginning and end of the vector, respectively.
 There are several member functions to note:
 
-    it.begin();                                             // Return iterator marking the beginnning of the vector
+    it.begin();                                             // Return iterator marking the beginning of the vector
     it.end();                                               // Return iterator marking the end of the vector
     aVector.insert( it, 7.0 );                              // Insert value at position of iterator 
     aVector.erase( it );                                    // Erase value at position of iterator
@@ -351,8 +349,230 @@ The `T` is an alias for a datatype which is specified when we call the routine:
 
     f< int >( x, y );
 
-## Classes
-An instance of a class is called an _object_.
+## Classes and Objects
+A _class_ is a programming construct which encapsulates and manipulates data. An instance of a class is called an _object_ which has real memory allocated to it.
+
+### Encapsulation
+Encapsulation can be achieved via various _access specifiers_:
+
+- Public
+- Private
+- Protected
+
+### Structures
+All members are publicly accessible from outside the class.
+
+    struct Person {
+        std::string name;
+        std::string address;
+        unsigned int age; 
+    };
+
+    ...
+
+    Person me; 
+    me.name = "Tom";
+    
+    Person other = me;                                      // Copies everything from me into other
+
+### Classes
+Use the `class` keyword and place statements within curly braces. Remember to put a semi-colon at the end of the definition! For example:
+
+    class Point {
+        public:
+            double getX();
+            double getY();
+            void setX( double val ); 
+            void setY( double val );
+            double norm();
+
+        private: 
+            double x_; 
+            double y_;
+    };
+
+By setting member variables to be private, and provide public getter and setter methods, we can validate the input to ensure data integrity. Member functions are defined outside the class construct, and we precede them with the class name and scope operator.
+
+    void Point::setX( double val ) {
+        x_ = val; 
+    }
+
+    void Point::setY( double val ) {
+        y_ = val; 
+    }
+    
+    double Point::getX () {
+        return x_; 
+    }
+
+    double Point::getY () {
+        return y_;
+    }
+    
+    double Point::norm () {
+        return std::sqrt( x_ * x_ + y_ * y_ ); 
+    }
+
+### Constructors
+A constructor is called when a class is first instantiated, always has the same name as the class, and has a return type of `void`. Constructors may, for example, initialise data members to a suitable initial value, and/or allocate any dynamic memory.
+
+There are two special constructors:
+
+- Default constructor: takes no parameters
+- Copy constructor: takes a constant reference to an instance of the class
+
+    class Point {
+        public:
+            Point();                                                        // default constructor
+            Point( double x, double y );                    
+            Point( const Point& source );                                   // copy constructor
+            ~Point();                                                       // destructor
+    
+            double getX();
+            ... 
+    }
+
+### Initialisation Lists
+Initialisation lists are a more efficient way of setting the starting values for member variables in an object.
+
+    Point::Point( double x, double y ) : x_( x ), y_( y ) {}
+
+### Accessing Member Functions
+Use the dot operator to call and access member functions of a class. For example,
+
+    int main () {
+        Point a; 
+
+        a.setX( 1.1 ); 
+        a.setY( 2.2 );
+
+        Point c = a;
+
+        std::cout << "(" << c.getX() << ", " << c.getY() << ")" << std::endl; 
+
+        Point b( 3.2, 5.6 );
+        std::cout << "distance from origin: " << c.norm() << std::endl;
+    }
+
+### Inheritance
+Inheritance allows the creation of classes which are derived from other classes – they become a specialisation of another class. The specialised class is called the _derived class_. The class from which it inherits is called the _base class_. 
+
+A derived class _extends_ the functionality of a base class. All members of the base class which are public or protected are available in the derived class. Additional members can be added to the derived class to extend the functionality of the base class.
+
+    class BaseClass { ... };
+
+    class DerivedClass : public BaseClass { ... };
+
+Note that the access specifier can only be `public` or `private`. The constructor of the derived class can only initialise
+members which the derived class can access. A derived class could never initialise private members of the
+base class. Thus, we must use the constructor of the base class to initialise those members.
+
+## Operator Overloading
+Operator overloading is the definition of standard operators in the context of a class. Depending on the function of the class, most operators can be overloaded so that they make sense for the class. Such as overloading the `+` operator for the Vector class to perform component-wise vector addition. Use the following schema to overload an operator:
+
+    <returntype> <class>::operator<sign> ({<operand>}) {}
+
+- `<returntype>` is usually `<class>`, `bool` or `void`
+- `<class>` is the name of the class
+- `operator<sign>` specifies which operator is being overloaded
+- `<operand>` specifies the second operand in the case of binary operators
+
+For example, here is how to overload the `==` operator to test if two `Point`s are equal
+
+    class Point {
+        bool operator==( const Point &source ) {
+            if( ( x_ == source.x_ ) && ( y_ == source.y_ ) ) {
+                return true;
+            }
+            return false;
+        }
+    };
+
+- The parameter is the second operand of the comparison
+- It should be passes as a constant reference as we don't want to change the RHS
+
+Then to use this overloaded operator:
+
+    Point a, b;
+    ...
+    if( a == b ) { ... }
+
+When overloading the assignment `=` operator ensure to return a reference to the original object:
+
+    Point& Point::operator=( const Point &source ) {
+        x_ = source.x_;
+        y_ = source.y_;
+        return *this;
+    }
+
+This means we can do this:
+
+    Point a, b, c, d;
+    a = b = c = d;
+
+### Self-Assignment
+Be careful, when overloading the assignment operator, not to perform self-assignment. Check first that the memory address of the operand `source` is not the same as that of `this`.
+
+### Non-Member Operators
+We have seen we can do this:
+
+    bool Complex::operator==( double val );
+
+    Complex a;
+    if( a == 5.0 ) { ... }
+
+But, even though this makes sense, we can't do
+
+    if( 5.0 == a ) { ... }
+
+However, we can define an operator on classes _outside_ a class:
+
+    class Complex {
+        bool operator==( double value );
+    };
+    ...
+    bool operator==( double value, const Complex &source ) {
+        return ( source == value );
+    }
+    ...
+    if( 5.0 == a ) { ... }
+
+## `static` Members
+`static` members are variables or routines which are shared among all instances of a class. There is only one unique copy. 
+
+- `static` variables can be thought of as global variables
+- A `static` class member cannot be initialised more than once, so it is not initialised in a constructor of a class. It must be initialised outside the class definition
+
+## The `typedef` Keyword
+C++ allows the definition of our own types based on other existing data types. Use the schema:
+
+    typedef ExistingType NewTypename;
+
+## The `explicit` Keyword
+In C++, the compiler is allowed to make one implicit conversion to resolve the parameters to a function. The compiler can use single parameter constructors to convert from one type to another in order to get the right type for a parameter. Prefixing the `explicit` keyword to the constructor prevents the compiler from using that constructor for implicit conversions.
+
+    class Foo {
+        public:
+            Foo (int foo) : foo_ (foo) {}
+            int GetFoo() {
+                return foo_;
+            }
+
+        private:
+            int foo_;
+    };
+    
+    ...
+
+    void DoBar( Foo foo ) {
+        int i = foo.GetFoo();
+    }
+
+    ...
+
+    int main() {
+        DoBar( 42 );
+    }
 
 ## Resources
 
