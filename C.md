@@ -300,3 +300,5 @@ To compile a program, we now need to use the `-lm` parameter so that the compile
 ## Resources
 
 - [CY900 - Foundations of Scientific Computing](http://www2.warwick.ac.uk/fac/sci/csc/teaching/modules/cy900/current/)
+- [C Basics](http://www.physics.drexel.edu/courses/Comp_Phys/General/C_basics/)
+- [Pointers](http://www.lemoda.net/c/boredzo-pointers/pointers.html)
