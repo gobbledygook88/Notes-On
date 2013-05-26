@@ -125,3 +125,24 @@ Here we present a list of sorting algorithms and sample pseudocode. Arrays are z
 
         input:  array A
         output: sorted array A
+
+        heap_sort(array A):
+            halfway = length(A)/2                               // Integer division
+            for i=halfway to i=0
+                heapify(i,A,length(A))
+            for i=length(A)-1 to i=0
+                swap(A[0],A[i])
+                heapify(0,A,i)
+
+        heapify(i,A,limit):
+            left  = 2*i
+            right = 2*i+1
+            if left<limit and A[left]>A[i]
+                max = left
+            else
+                max = i
+            if right<limit and A[right]>A[max]
+                max = right
+            if max != i
+                swap(A[i],A[max])
+                heapify(max,A,limit)
