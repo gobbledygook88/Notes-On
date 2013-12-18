@@ -26,6 +26,8 @@ There are two ways of declaring a function. Both are valid, but try to use the s
 Call the function such as `function_name(prop_one,prop_two)`.
 
 ### Objects
+An object is an unordered list of primitive data (and sometimes reference data types) types that are stored as name-value pairs. Each item in the list is called a property (functions are called methods) and each property name has to be unique and can be a string or a number.
+
 There are two ways to declare an object in Javascript: through _literal notation_ or via a _constructor_.
 
     // Literal Notation
@@ -183,3 +185,4 @@ Arrays can contain any objects, in any combination, even arrays themselves to ma
 - [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/JavaScript) Javascript documentation
 - [Javascript Scope Quiz](http://madebyknight.com/javascript-scope/)
 - [Understanding Javascript OOP](http://killdream.github.com/blog/2011/10/understanding-javascript-oop/)
+- [Javascript Objects in Detail](http://javascriptissexy.com/javascript-objects-in-detail/)
